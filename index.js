@@ -1,19 +1,16 @@
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err.message);
+  console.error(err.stack);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('UNHANDLED REJECTION:', reason);
+});
+
 const functions = require("firebase-functions");
 const axios = require("axios");
 const express = require("express");
 const cors = require("cors");
-
-// Crash Prevention & Logging
-process.on('uncaughtException', (err) => {
-  console.error('CRITICAL UNCAUGHT EXCEPTION:', err.message);
-  console.error(err.stack);
-  // Give time for logs to flush before exiting
-  setTimeout(() => process.exit(1), 500);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('UNHANDLED REJECTION at:', promise, 'reason:', reason);
-});
 
 console.log('Starting AgriFlow Backend...');
 console.log('Environment:', process.env.NODE_ENV);
