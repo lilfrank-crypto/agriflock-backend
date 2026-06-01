@@ -158,11 +158,11 @@ const handleCheckStatus = async (req, res) => {
 };
 
 // Express Routes
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'AgriFlow backend running' })
+})
 app.post("/mpesa/stkpush", handleStkPush);
 app.post("/mpesa/status", handleCheckStatus);
-
-// Health check
-app.get("/", (req, res) => res.send("AgriFlow M-Pesa Backend Active"));
 
 // Start server for Railway
 const PORT = process.env.PORT || 8080;
